@@ -1,7 +1,9 @@
+# frozen_string_literal:true
+
 module Enumerable
   def my_each
     i = 0
-    while i < self.length
+    while i < length
       yield(self[i])
       i += 1
     end
@@ -9,7 +11,7 @@ module Enumerable
 
   def my_each_with_index
     i = 0
-    while i < self.length
+    while i < length
       yield(self[i], i)
       i += 1
     end
@@ -17,12 +19,11 @@ module Enumerable
 
   def my_select
     result = []
-    self.my_each do |element|
-      result << element if yield(element) 
+    my_each do |element|
+      result << element if yield(element)
     end
     result
   end
-        
 
+  
 end
-
