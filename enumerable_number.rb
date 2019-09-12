@@ -25,5 +25,17 @@ module Enumerable
     result
   end
 
-  
+  def my_all
+    result = true
+    if block_given?
+      my_each do |element|
+        result = false unless yield(element)
+      end
+    else
+      my_each do |element|
+        result = false unless element
+      end
+    end
+    result
+  end
 end
