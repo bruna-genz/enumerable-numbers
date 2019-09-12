@@ -66,4 +66,14 @@ module Enumerable
     end
     result
   end
+
+  def my_count
+    result = length
+    unless block_given?
+      my_each do |element|
+        result += 1 if yield(element)
+      end
+    end
+    result
+  end
 end
