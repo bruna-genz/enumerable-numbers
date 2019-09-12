@@ -52,4 +52,18 @@ module Enumerable
     end
     result
   end
+
+  def my_none?
+    result = true
+    if block_given?
+      my_each do |element|
+        result = false if yield(element)
+      end
+    else
+      my_each do |element|
+        result = false if element
+      end
+    end
+    result
+  end
 end
