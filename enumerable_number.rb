@@ -25,7 +25,7 @@ module Enumerable
     result
   end
 
-  def my_all
+  def my_all?
     result = true
     if block_given?
       my_each do |element|
@@ -34,6 +34,20 @@ module Enumerable
     else
       my_each do |element|
         result = false unless element
+      end
+    end
+    result
+  end
+
+  def my_any?
+    result = false
+    if block_given?
+      my_each do |element|
+        result = true if yield(element)
+      end
+    else
+      my_each do |element|
+        result = true if element
       end
     end
     result
