@@ -77,10 +77,16 @@ module Enumerable
     result
   end
 
-  def my_map
+  def my_map(proc = nil)
     result = []
-    my_each do |element|
-      result << yield(element)
+    if proc
+      my_each do |element|
+        result << proc.call(element)
+      end
+    else
+      my_each do |element|
+        result << yield(element)
+      end
     end
     result
   end
