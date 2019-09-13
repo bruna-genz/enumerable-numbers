@@ -85,10 +85,27 @@ module Enumerable
     result
   end
 
-  def my_inject
+  def my_inject(arg1 = nil, arg2 = nil)
+    result = self[0]
+    if block_given?
+      my_each do |element|
+        result = yield(result, element)
+      end
+    else
+      result = arg1
+      operation = arg2.to_proc
+      my_each do |element|
+        result = operation.call(result, element)
+        puts element
+      end
+    end
+    result
+  end
+
+  def multiply_els
     result = 0
-    my_each do |element|
-      result += yield(element)
+    my_inject do |element|
+      result *= yield(element)
     end
     result
   end
