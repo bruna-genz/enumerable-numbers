@@ -84,4 +84,12 @@ module Enumerable
     end
     result
   end
+
+  def my_inject
+    result = 0
+    my_each do |element|
+      result += yield(element)
+    end
+    result
+  end
 end
