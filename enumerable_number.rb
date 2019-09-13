@@ -76,4 +76,12 @@ module Enumerable
     end
     result
   end
+
+  def my_map
+    result = []
+    my_each do |element|
+      result << yield(element)
+    end
+    result
+  end
 end
