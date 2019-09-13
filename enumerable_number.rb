@@ -96,17 +96,12 @@ module Enumerable
       operation = arg2.to_proc
       my_each do |element|
         result = operation.call(result, element)
-        puts element
       end
     end
     result
   end
+end
 
-  def multiply_els
-    result = 0
-    my_inject do |element|
-      result *= yield(element)
-    end
-    result
-  end
+def multiply_els(array)
+  array.my_inject(1, :*)
 end
