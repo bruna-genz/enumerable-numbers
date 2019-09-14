@@ -67,12 +67,18 @@ module Enumerable
     result
   end
 
-  def my_count
-    result = length
-    unless block_given?
+  def my_count(arg = nil)
+    result = 0
+    if block_given?
       my_each do |element|
         result += 1 if yield(element)
       end
+    elsif arg
+      my_each do |element|
+        result += 1 if element == arg
+      end
+    else
+      result = length
     end
     result
   end
@@ -92,17 +98,14 @@ module Enumerable
   end
 
   def my_inject(arg1 = nil, arg2 = nil)
-    result = self[0]
+    result = 0
     if block_given?
-      my_each do |element|
-        result = yield(result, element)
-      end
+      result = arg1 if arg1
+      my_each { |element| result = yield(result, element) }
     else
       result = arg1
       operation = arg2.to_proc
-      my_each do |element|
-        result = operation.call(result, element)
-      end
+      my_each { |element| result = operation.call(result, element) }
     end
     result
   end
