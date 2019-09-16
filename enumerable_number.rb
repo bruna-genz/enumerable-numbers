@@ -86,22 +86,22 @@ module Enumerable
   def my_map(proc = nil)
     result = []
     if proc
-      my_each do |element|
-        result << proc.call(element)
-      end
+      my_each { |element| result << proc.call(element) }
     else
-      my_each do |element|
-        result << yield(element)
-      end
+      my_each { |element| result << yield(element) }
     end
     result
   end
 
   def my_inject(arg1 = nil, arg2 = nil)
-    result = 0
-    if block_given?
-      result = arg1 if arg1
+    if block_given? && arg1
+      result = arg1
       my_each { |element| result = yield(result, element) }
+    elsif block_given? && !arg1
+      result = self[0]
+      my_each_with_index do |element, index|
+        result = yield(result, element) unless index.zero?
+      end
     else
       result = arg1
       operation = arg2.to_proc
