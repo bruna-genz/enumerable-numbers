@@ -67,6 +67,32 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe "my_any?" do
+    context "when code block is given" do
+      it "returns true if the block ever return a true value" do
+        expect([1, 2, 3].my_any? { |element| element > 2 }).to eql(true)
+      end
+    end
+
+    context "when code block is given" do
+      it "returns true if the block ever return a true value" do
+        expect([1, 2, 3].my_any? { |element| element > 4 }).to eql(false)
+      end
+    end
+
+    context "when no code block is given" do
+      it "returns true when any of the elements are true" do
+        expect([nil, false, 99].my_any?).to eql(true)
+      end
+    end
+
+    context "when an argument is given" do
+      it "returns true if any of the elements is === to the argument" do
+        expect([nil, true, 99].my_any?(Integer)).to eql(true)
+      end
+    end
+  end
+
   describe "my_count" do
     let(:array) { [1, 2, 3, 2] }
     
