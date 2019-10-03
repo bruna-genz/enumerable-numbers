@@ -35,5 +35,35 @@ RSpec.describe Enumerable do
     end
   end
 
-  
+  describe "my_all?" do
+    context "when code block is passed" do
+      it "returns true if the block never returns false or nil" do
+        expect([1, 2, 3].my_all? { |element| element > 0 }).to eql(true)
+      end
+    end
+
+    context "when code block is passed" do
+      it "returns true if the block never returns false or nil" do
+        expect([1, 2, 3].my_all? { |element| element > 1 }).to eql(false)
+      end
+    end
+
+    context "when no code block is passed" do
+      it "returns true when none of the elements are false or nil" do
+        expect([1, 2, 3].my_all?).to eql(true)
+      end
+    end
+
+    context "when no code block is passed" do
+      it "returns true when none of the elements are false or nil" do
+        expect([1, 2, nil].my_all?).to eql(false)
+      end
+    end
+
+    context "when no code block is passed" do
+      it "returns true when none of the elements are false or nil" do
+        expect([].my_all?).to eql(true)
+      end
+    end
+  end
 end
