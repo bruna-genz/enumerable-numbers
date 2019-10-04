@@ -114,4 +114,50 @@ RSpec.describe Enumerable do
       end
     end
   end
+
+  describe "my_inject" do
+    let (:array) { [3, 6, 10, 13] }
+
+    context "when code block is given without any argument" do
+      it "passes each element and accumulates the sum sequentially" do
+        expect(array.my_inject { |sum, number| sum + number }).to eql(32)
+      end
+    end
+
+    context "when code block is given without any argument" do
+      it "passes each element and accumulates the product sequentially" do
+        expect(array.my_inject { |prod, number| prod * number }).to eql(2340)
+      end
+    end
+
+    context "when code block and an argument are given" do
+      it "accumulates the sum sequentially using the argument as base" do
+        expect(array.my_inject(5) { |sum, number| sum + number }).to eql(37)
+      end
+    end
+
+    context "when code block and an argument are given" do
+      it "accumulates the product sequentially using the argument as base" do
+        expect(array.my_inject(5) { |sum, number| sum * number }).to eql(11700)
+      end
+    end
+
+    context "when the operator is passed as a symbol without other argument" do
+      it "passes each element and accumulated each result sequentially" do
+        expect(array.my_inject(:+)).to eql(32)
+      end
+    end
+
+    context "when the operator is passed as a symbol with other argument" do
+      it "passes each element and accumulated each result sequentially" do
+        expect(array.my_inject(0, :+)).to eql(32)
+      end
+    end
+
+    context "when the operator is passed as a symbol with other argument" do
+      it "passes each element and accumulated each result sequentially" do
+        expect(array.my_inject(1, :*)).to eql(2340)
+      end
+    end
+  end
 end
