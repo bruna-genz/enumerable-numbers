@@ -7,9 +7,7 @@ RSpec.describe Enumerable do
     let(:array) { [1, 2, 3, 4] }
 
     it 'returns the original array' do
-      output = []
-      array.my_each { |element| output << element }
-      expect(output).to eql([1, 2, 3, 4])
+      expect(array.my_each { |element| element }).to eql([1, 2, 3, 4])
     end
 
     it 'returns an enumerable if no code block is given' do
@@ -17,9 +15,7 @@ RSpec.describe Enumerable do
     end
 
     it 'runs the code block on each element' do
-      output = []
-      array.my_each { |element| output << element**2 }
-      expect(output).to eql([1, 4, 9, 16])
+      expect(array.my_each { |element| element**2 }).to eql([1, 4, 9, 16])
     end
   end
 
@@ -27,9 +23,7 @@ RSpec.describe Enumerable do
     let(:array) { [1, 2, 3, 4, 5, 6] }
 
     it 'returns all items for which the given block returns a true value' do
-      output = []
-      array.my_select { |element| output << element if element.even? }
-      expect(output).to eql([2, 4, 6])
+      expect(array.my_select { |element| element > 3 }).to eql([4, 5, 6])
     end
 
     it 'returns an enumerable if no code block is given' do
