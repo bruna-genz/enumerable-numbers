@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal:true
 
 require './lib/enumerable_number'
 
@@ -141,12 +141,6 @@ RSpec.describe Enumerable do
     context 'when code block and an argument are given' do
       it 'accumulates the product sequentially using the argument as base' do
         expect(array.my_inject(5) { |sum, number| sum * number }).to eql(11_700)
-      end
-    end
-
-    context 'when the operator is passed as a symbol without other argument' do
-      it 'passes each element and accumulated each result sequentially' do
-        expect(array.my_inject(:+)).to eql(32)
       end
     end
 
